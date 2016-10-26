@@ -7,8 +7,14 @@ package userinterface.SystemAdminWorkArea;
 
 import Business.EcoSystem;
 import Business.Network.Network;
+import Business.NetworkDAO.NetworkDAO;
+import Business.NetworkDAO.iNetworkDAO;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -20,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 public class ManageNetworkJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private EcoSystem system;
-    
+    private iNetworkDAO networkDAO;
 
    
     
@@ -31,14 +37,26 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         initComponents();
         userProcessContainer = upc;
         system = sys;
+        networkDAO = new NetworkDAO();
         
         populateNetworkTable();
     }
+    
      private void populateNetworkTable() {
         DefaultTableModel model = (DefaultTableModel) networkJTable.getModel();
 
         model.setRowCount(0);
-        for (Network network : system.getNetworkList()) {
+        
+        List<Network> networkList = new ArrayList<>();
+        try {
+            networkList = networkDAO.findAll();
+        } catch (Exception ex) {
+            Logger.getLogger(ManageNetworkJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        //old code 
+        //for (Network network : system.getNetworkList()) {
+        for (Network network : networkList) {
             Object[] row = new Object[1];
             row[0] = network.getName();
             model.addRow(row);
@@ -135,13 +153,14 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                return;
            }
            
-            Network network = system.createAndAddNetwork();
-            network.setName(name);
-
+            //old code
+            //Network network = system.createAndAddNetwork();
+            Network network = new Network(0, name);            
+            networkDAO.insertNetwork(network);
             populateNetworkTable();
        
        }catch(Exception e){
-           JOptionPane.showMessageDialog(null,"Please enter a vaild string");
+           JOptionPane.showMessageDialog(null,"Please enter a vaild string: " + e);
            return;
        }
         
