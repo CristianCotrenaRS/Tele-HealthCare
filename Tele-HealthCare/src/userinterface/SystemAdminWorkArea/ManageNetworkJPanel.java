@@ -55,8 +55,8 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         }
         
         //old code 
-        //for (Network network : system.getNetworkList()) {
-        for (Network network : networkList) {
+        for (Network network : system.getNetworkList()) {
+//        for (Network network : networkList) {
             Object[] row = new Object[1];
             row[0] = network.getName();
             model.addRow(row);
@@ -155,8 +155,9 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
            
             //old code
             //Network network = system.createAndAddNetwork();
-            Network network = new Network(0, name);            
-            networkDAO.insertNetwork(network);
+            Network network = system.createAndAddNetwork(name);
+//            network.setName(name);
+
             populateNetworkTable();
        
        }catch(Exception e){

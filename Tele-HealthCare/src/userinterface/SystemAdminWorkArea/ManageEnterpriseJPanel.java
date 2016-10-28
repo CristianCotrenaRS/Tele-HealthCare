@@ -38,6 +38,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) enterpriseJTable.getModel();
 
         model.setRowCount(0);
+        
         for (Network network : system.getNetworkList()) {
             for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
                 Object[] row = new Object[3];

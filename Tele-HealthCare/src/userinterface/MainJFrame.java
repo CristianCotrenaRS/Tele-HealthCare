@@ -43,7 +43,7 @@ public class MainJFrame extends javax.swing.JFrame {
         this.setSize(x, y);
         
         system = dB4OUtil.retrieveSystem();
-         
+        system.checkNetworkData();
     }
 
     /**
