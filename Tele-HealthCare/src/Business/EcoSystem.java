@@ -19,7 +19,7 @@ import userinterface.SystemAdminWorkArea.ManageNetworkJPanel;
  * @author Neelu
  */
 public class EcoSystem extends Organization {
-
+//oi
     private static EcoSystem business;
     private ArrayList<Network> networkList;
     private iNetworkDAO networkDAO;
