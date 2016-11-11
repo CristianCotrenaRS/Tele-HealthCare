@@ -26,8 +26,6 @@ import javax.swing.table.DefaultTableModel;
 public class ManageNetworkJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private EcoSystem system;
-    private iNetworkDAO networkDAO;
-
    
     
     /**
@@ -37,7 +35,6 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         initComponents();
         userProcessContainer = upc;
         system = sys;
-        networkDAO = new NetworkDAO();
         
         populateNetworkTable();
     }
@@ -46,13 +43,6 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) networkJTable.getModel();
 
         model.setRowCount(0);
-        
-        List<Network> networkList = new ArrayList<>();
-        try {
-            networkList = networkDAO.findAll();
-        } catch (Exception ex) {
-            Logger.getLogger(ManageNetworkJPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
         //old code 
         for (Network network : system.getNetworkList()) {
