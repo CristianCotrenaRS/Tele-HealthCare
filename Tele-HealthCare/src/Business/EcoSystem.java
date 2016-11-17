@@ -19,7 +19,7 @@ import userinterface.SystemAdminWorkArea.ManageNetworkJPanel;
  * @author Neelu
  */
 public class EcoSystem extends Organization {
-//oi
+
     private static EcoSystem business;
     private ArrayList<Network> networkList;
     private iNetworkDAO networkDAO;
@@ -34,6 +34,8 @@ public class EcoSystem extends Organization {
     private EcoSystem() {
         super(null);
         networkList = new ArrayList<>();
+        //pos: criação da NetworkList
+        assert networkList.isEmpty() == true;
     }
     
     public void checkNetworkData(){
@@ -71,7 +73,8 @@ public class EcoSystem extends Organization {
     }
 
     public Network createAndAddNetwork(String name) {
-        
+        //pre: nome diferente de nulo;
+        assert name != null;
         Network network = new Network();   
         network.setName(name);
         try {
@@ -92,7 +95,8 @@ public class EcoSystem extends Organization {
     }
 
     public boolean checkIfUsernameIsUnique(String username) {
-
+        //pre: username diferente de nulo
+        assert username != null;
         if (!this.getUserAccountDirectory().checkIfUsernameIsUnique(username)) {
             return false;
         }
