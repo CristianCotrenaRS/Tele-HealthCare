@@ -18,8 +18,8 @@ public class Network {
     
     
     public Network(int id, String name) {
-        // pre: id > 0 e name diferente de nulo;
-        assert id > 0;
+        // pre: id >= 0 e name diferente de nulo;
+        assert id >= 0;
         assert name != null;
         
         this.id = id;
@@ -42,10 +42,10 @@ public class Network {
         return id;
     }
 
-    //pre: id > 0;
+    //pre: id >= 0;
     //pos: id igual ao parametro recebido;
     public void setId(int id) {
-        assert id > 0;
+        assert id >= 0;
         this.id = id;
         assert this.id == id;
     }
